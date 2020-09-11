@@ -26,6 +26,7 @@ public class GetDBInfo {
             inputStream.close();
             return dbInfo; 
         } catch (IOException e) {
+            System.out.println("dbInfo_Ba.properties file read error.");
             return null;
         } 
     }

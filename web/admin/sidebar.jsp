@@ -18,6 +18,7 @@
             <li class="header">MAIN NAVIGATION</li>
             <li class="active treeview">
                 <a href="home.jsp"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                <a href="SetOldFpApiIp.jsp"><i class="fa fa-dashboard"></i> <span>Old Finger Matching API Info</span></a>
                 <a href="dbInfo.jsp"><i class="fa fa-dashboard"></i> <span>Database Information</span></a>
                 <a href="newAdmin.jsp"><i class="fa fa-dashboard"></i> <span>New Admin</span></a>
                 <a href="matchingScore.jsp"><i class="fa fa-dashboard"></i> <span>Matching Score</span></a>

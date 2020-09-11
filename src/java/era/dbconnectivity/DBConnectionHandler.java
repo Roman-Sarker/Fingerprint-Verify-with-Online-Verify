@@ -39,10 +39,11 @@ public class DBConnectionHandler {
         String userName = dbInfo.userName;
         String password = dbInfo.password;  
 
-     //   String URL = "jdbc:oracle:thin:@10.11.201.55:1525/iabdb";
-      //  String userName = "biotpl";
-      //  String password = "biotpl";
-        
+        //String URL = "jdbc:oracle:thin:@10.11.201.55:1525/iabdb";
+  /*      String URL = "jdbc:oracle:thin:@202.40.190.10:1525/ucbldb";
+        String userName = "biotpl";
+        String password = "biotplEra#123";
+  */      
         
         //System.out.println("username: " + userName);
         //System.out.println("password: " + password);

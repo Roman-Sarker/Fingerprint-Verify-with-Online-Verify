@@ -108,10 +108,7 @@ public class FingerPrintVerification {
                 byte[] RRING = getByteDataFromBlob(rs.getBlob("RRING"));
                 byte[] RLITTLE = getByteDataFromBlob(rs.getBlob("RLITTLE"));
 
-//                data[0] = LINDEX;
-//                data[1] = LTHUMB;
-//                data[2] = RINDEX;
-//                data[3] = RTHUMB;
+
                 data[0] = RTHUMB;
                 data[1] = LTHUMB;
                 data[2] = RINDEX;
@@ -153,7 +150,7 @@ public class FingerPrintVerification {
             if (flag_to_check_null_data) {
                 loginModel.setErrorFlag("Y");
                 loginModel.setErrorMessage("Fingerprint data is null"
-                        + " for customer number " + loginModel.getCustno());
+                        + " for customer number " + loginModel.getName());
                 list.add(loginModel);
                 DBConnectionHandler.releaseConnection(con);
                 return list;

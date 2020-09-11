@@ -48,7 +48,7 @@ public class FingerEnrollment extends HttpServlet {
         }
 
         String name = "", app_user = "", ai_logid = "",
-                cust_type = "", serial = "";
+                onlineChkStatus = "N", serial = "";
 
         String lindex = "", llittle = "", lthumb = "", lmiddle = "", lring = "",
                 rindex = "", rring = "", rlittle = "", rthumb = "", rmiddle = "";
@@ -64,7 +64,7 @@ public class FingerEnrollment extends HttpServlet {
             name = (String) jsonObject.get("name");
             app_user = (String) jsonObject.get("app_user");
             ai_logid = (String) jsonObject.get("ai_logid");
-            cust_type = (String) jsonObject.get("cust_type"); 
+            onlineChkStatus = (String) jsonObject.get("cust_type"); 
             serial = (String) jsonObject.get("serial");
             serial = serial.trim();
             
@@ -78,7 +78,7 @@ public class FingerEnrollment extends HttpServlet {
           /*  System.out.println("cust_no "+name);
             System.out.println("create_by is "+app_user);
             System.out.println("ai_logid is "+ai_logid);
-            System.out.println("user_type is "+cust_type); 
+            System.out.println("user_type is "+onlineChkStatus); 
             System.out.println("serial is "+serial); */
 
             rindex = (String) jsonObject.get("rindex");
@@ -119,7 +119,7 @@ public class FingerEnrollment extends HttpServlet {
         enrollInformation.setAi_logid(ai_logid);
         enrollInformation.setApp_user(app_user);
         enrollInformation.setSerial(serial);
-        enrollInformation.setCust_type(cust_type); 
+        enrollInformation.setCust_type(onlineChkStatus); 
         
         enrollInformation.setlIndex(lIndex);
         enrollInformation.setlThumb(lThumb);
@@ -148,14 +148,23 @@ public class FingerEnrollment extends HttpServlet {
                    map.put("errorMessage","finger data length is too long for enrollment");
             }
             else{
-                // Online verify
-                OnlineVerify onlineVerify = new OnlineVerify();
-                enrollInformation = onlineVerify.checkSuspicuousAgent(enrollInformation);
-                System.out.println("Online Match Complete"); 
-                if(enrollInformation.getErrorFlag().equals("N")){
-                        System.out.println("After online match now enroll finger data.");
-                        enrollInformation = enroll.enrollFinger(enrollInformation);  // Enroll finger data.
-                    }
+                System.out.println("Online check required or Not ? "+onlineChkStatus);
+                if(onlineChkStatus.equals("Y")){ // Actually here checked Is Online Verify required or Not
+                    // Online verify
+                    OnlineVerify onlineVerify = new OnlineVerify();
+                    enrollInformation = onlineVerify.checkSuspicuousAgent(enrollInformation);
+                    System.out.println("Online Match Complete"); 
+                    if(enrollInformation.getErrorFlag().equals("N")){
+                            System.out.println("After online match now enroll finger data.");
+                            enrollInformation = enroll.enrollFinger(enrollInformation);  // Enroll finger data.
+                        }
+                }else{
+                    System.out.println("Without online match. Enroll starting.");
+                    enrollInformation = enroll.enrollFinger(enrollInformation);  // Enroll finger data.
+                }
+                
+                
+                
                 map.put("errorFlag", enrollInformation.getErrorFlag());
                 map.put("errorMessage", enrollInformation.getErrorMessage());
                 

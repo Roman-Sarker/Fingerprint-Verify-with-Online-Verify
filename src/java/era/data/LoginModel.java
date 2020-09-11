@@ -16,6 +16,15 @@ public class LoginModel {
     private String name, pAmount, pOperationType, appuser, pDeviceId, pEnrolFrom, pSessionId;
     private String pCustType, pLogId, errorFlag, errorMessage,custno;
     private String fingerName,matchingScore;
+    private String reqStrParam;
+
+    public String getReqStrParam() {
+        return reqStrParam;
+    }
+
+    public void setReqStrParam(String reqStrParam) {
+        this.reqStrParam = reqStrParam;
+    }
 
     public String getMatchingScore() {
         return matchingScore;
